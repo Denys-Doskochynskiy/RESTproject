@@ -24,6 +24,7 @@ import ua.lviv.iot.spring.first.restapp.model.Student;;
 @RequestMapping("/students")
 @RestController
 public class StudentsController {
+  
     static private Map<Integer, Student> students = new HashMap<>();
     static private AtomicInteger idCounter = new AtomicInteger();
     @Autowired
@@ -42,10 +43,7 @@ public class StudentsController {
     @PostMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
 
     public Student createStudent(final @RequestBody Student student) {
-        System.out.println(studentService.createStudent(student));
-        student.setId(idCounter.incrementAndGet());
-        students.put(student.getId(), student);
-        return student;
+        return studentService.createStudent(student);
     }
 
     @DeleteMapping(path = "/{id}")

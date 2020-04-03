@@ -1,50 +1,69 @@
 package ua.lviv.iot.spring.first.restapp.model;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 @Entity
 public class Student {
-    private String firsStudent;
-    private String secondStudent;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+  private String firstName;
+  private String secondName;
+  
+ 
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Integer id;
 
-    public Student(String firstStudent, String secondStudent) {
-        super();
-        // this.id=id;
-        this.firsStudent = firstStudent;
-        this.secondStudent = secondStudent;
-    }
+  public Group getGroup() {
+    return group;
+  }
 
-    public Student() {
-    }
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "group_id")
+  @JsonIgnoreProperties("students")
+  private Group group;
 
-    public String getSecondStudent() {
-        return secondStudent;
-    }
+  public Student() {}
 
-    public void setSecondStudent(String secondStudent) {
-        this.secondStudent = secondStudent;
-    }
+  public void setGroup(Group group) {
+    this.group = group;
+  }
 
-    public String getFirsStudent() {
-        return firsStudent;
-    }
+  public Student(String firstName, String secondName) {
+    super();
+    // this.id=id;
+    this.firstName = firstName;
+    this.secondName = secondName;
+  }
 
-    public void setFirsStudent(String firsStudent) {
-        this.firsStudent = firsStudent;
-    }
 
-    public Integer getId() {
-        return id;
-    }
+  public String getSecondName() {
+    return secondName;
+  }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+  public void setSecondName(String secondName) {
+    this.secondName = secondName;
+  }
+
+  public String getFirstName() {
+    return firstName;
+  }
+
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public Integer getId() {
+    return id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
 }
