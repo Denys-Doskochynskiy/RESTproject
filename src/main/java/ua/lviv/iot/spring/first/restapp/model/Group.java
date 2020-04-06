@@ -20,7 +20,7 @@ public class Group {
   private String name;
   private Integer enrolmentYear;
   
-  @OneToMany(mappedBy = "Group", fetch = FetchType.EAGER)
+  @OneToMany(mappedBy = "group", fetch = FetchType.EAGER)
   @JsonIgnoreProperties("group")
   private Set<Student> students;
   
@@ -66,6 +66,5 @@ public class Group {
   }
 
   public Group() {}
-
 
 }
