@@ -29,9 +29,6 @@ public class Subject {
   private Set<Student> students;
 
 
-  public Subject() {}
-
-
   public Integer getId() {
     return Id;
   }
