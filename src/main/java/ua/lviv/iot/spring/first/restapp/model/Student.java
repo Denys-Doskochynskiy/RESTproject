@@ -1,15 +1,18 @@
 package ua.lviv.iot.spring.first.restapp.model;
 
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedNativeQuery;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -35,8 +38,11 @@ public class Student {
 
   public Student() {}
   
-  @JsonIgnoreProperties("student")
-  @ManyToMany(mappedBy = "students")
+  @ManyToMany( cascade = {CascadeType.MERGE})
+  @JoinTable(name = "Student_Subjects",
+  joinColumns = { @JoinColumn(name = "student_id", nullable=false)},
+  inverseJoinColumns = { @JoinColumn(name = "subject_id", nullable=true)})
+  @JsonIgnoreProperties("students")
   private Set<Subject> subjects;
 
   public Set<Subject> getSubjects() {
